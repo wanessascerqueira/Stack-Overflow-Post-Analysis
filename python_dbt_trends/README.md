@@ -1,14 +1,25 @@
 # 🚀 Stack Overflow Year-over-Year Analysis: Python vs DBT
 
 ## 🎯 Objective
-This analysis addresses the following question:
 
-> For posts tagged only with **`python`** or **`dbt`**, what is the **year-over-year (YoY) change** of:
->
-> - Question-to-answer ratio  
-> - Rate of approved answers  
->
-> over the last 10 years? How do posts tagged with only `python` compare to posts only tagged with `dbt`?
+For posts tagged **only** with `python` or `dbt`, this analysis:
+
+- Computes year-over-year (YoY) change of **question-to-answer ratio**.
+- Computes year-over-year change of **accepted answer rate**.
+- Compares Python to DBT posts over the last 10 years (2013–2022).
+
+---
+
+## 🛠 SQL Technical Approach
+
+1. **Filter single-tagged questions**: Only posts with 1 tag (`python` or `dbt`) are considered to avoid mixing signals from multiple topics.  
+2. **Aggregate answers**: Count total answers per question using the `posts_answers` table.  
+3. **Combine questions and answers**: Compute metrics:
+   - `avg_answers_per_question`  
+   - `accepted_answer_rate`  
+4. **Year-over-year changes**: Using `LAG()` function partitioned by `tag` to compute YoY changes in percentage.  
+5. **Rounding and safety**: Metrics rounded to 2 decimals and division by zero handled with `SAFE_DIVIDE()`.  
+6. **Filtering last 10 years**: Ensures results are recent and relevant for comparison.
 
 ---
 
