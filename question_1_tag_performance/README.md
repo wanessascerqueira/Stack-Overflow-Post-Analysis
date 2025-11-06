@@ -6,10 +6,10 @@ This analysis answers the following questions:
 - **Single Tags:** Which tags on Stack Overflow questions lead to the most answers and the highest accepted answer rate for the current year? Which tags lead to the least?  
 - **Tag Pairs:** How do combinations of tags (co-occurring tags) impact answers and acceptance rates?  
 
+The results provide actionable insights for understanding community engagement around specific topics or topic combinations.
+
 > **Data year analyzed:** 2022  
 > Note: The query dynamically detects the latest available year in the dataset. Although the current year is 2025, the most recent data available in BigQuery public dataset is from 2022.
-
-The results provide actionable insights for understanding community engagement around specific topics or topic combinations.
 
 ---
 
