@@ -6,6 +6,9 @@ This analysis answers the following questions:
 - **Single Tags:** Which tags on Stack Overflow questions lead to the most answers and the highest accepted answer rate for the current year? Which tags lead to the least?  
 - **Tag Pairs:** How do combinations of tags (co-occurring tags) impact answers and acceptance rates?  
 
+> **Data year analyzed:** 2022  
+> Note: The query dynamically detects the latest available year in the dataset. Although the current year is 2025, the most recent data available in BigQuery public dataset is from 2022.
+
 The results provide actionable insights for understanding community engagement around specific topics or topic combinations.
 
 ---
@@ -44,8 +47,8 @@ The results provide actionable insights for understanding community engagement a
 | 1    | conditional-aggregation | 23 | 1.39 | 0.96 |
 | 2    | sql-in                  | 22 | 1.27 | 0.91 |
 | 3    | usort                   | 11 | 1.18 | 0.91 |
-| 3    | moose                   | 11 | 1.18 | 0.91 |
-| 3    | select-object           | 11 | 1.18 | 0.91 |
+| 4    | moose                   | 11 | 1.18 | 0.91 |
+| 5    | select-object           | 11 | 1.18 | 0.91 |
 | 6    | malli                   | 11 | 1.00 | 0.91 |
 | 7    | jstreer                 | 11 | 0.91 | 0.91 |
 | 8    | non-standard-evaluation | 10 | 1.80 | 0.90 |
@@ -76,9 +79,9 @@ The results provide actionable insights for understanding community engagement a
 | 3    | google-query-language | match | 10 | 1.40 | 1.00 |
 | 4    | conditional-aggregation | group-by | 13 | 1.38 | 1.00 |
 | 5    | google-sheets-formula | syntax | 11 | 1.36 | 1.00 |
-| 5    | sql-order-by | window-functions | 11 | 1.36 | 1.00 |
+| 6    | sql-order-by | window-functions | 11 | 1.36 | 1.00 |
 | 7    | moose | perl | 10 | 1.30 | 1.00 |
-| 7    | ggplot2 | purrr | 10 | 1.30 | 1.00 |
+| 8    | ggplot2 | purrr | 10 | 1.30 | 1.00 |
 | 9    | flatten | transpose | 40 | 1.27 | 1.00 |
 | 10   | google-query-language | transpose | 20 | 1.25 | 1.00 |
 | 10   | google-query-language | import | 20 | 1.25 | 1.00 |
