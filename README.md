@@ -1,127 +1,28 @@
-# 📊 Stack Overflow Tag Analysis — 2025 Data Exploration
-
-**Author:** Wanessa Cerqueira  
-**Date:** November 2025  
-**Tools:** Google BigQuery (public Stack Overflow dataset), Standard SQL  
-
----
+# 🚀 Stack Overflow Tag & Tag-Pair Performance Analysis (Most Recent Year)
 
 ## 🎯 Objective
+This analysis answers the following questions:  
 
-The goal of this analysis is to identify:
+- **Single Tags:** Which tags on Stack Overflow questions lead to the most answers and the highest accepted answer rate for the current year? Which tags lead to the least?  
+- **Tag Pairs:** How do combinations of tags (co-occurring tags) impact answers and acceptance rates?  
 
-1. **Which tags** on Stack Overflow questions lead to the **most answers** and **highest rate of accepted answers** (i.e., highest community engagement and resolution).  
-2. Which tags lead to the **least answers** or **lowest acceptance rates**.  
-3. **Which tag pairs (combinations)** perform best and worst.
-
-The focus is on the **current year available** in the dataset, ensuring relevance and fair comparison.
+The results provide actionable insights for understanding community engagement around specific topics or topic combinations.
 
 ---
 
-## 🧠 Technical Approach
+## 🛠 Technical Approach
 
-This solution follows an intentional, modular structure designed to balance:
-
-- **Performance** (reduced data scanning and optimized joins)  
-- **Clarity and readability**  
-- **Scalability** (ready to be integrated into dashboards or pipelines)  
-- **Data quality** validation at each step  
-
----
-
-### 🧩 Step-by-step Design
-
-1. **Identify the temporal boundary**  
-   - Determine the latest year available in the dataset.  
-   - Ensures the query dynamically adjusts if new data is added.
-
-2. **Filter to the most recent year**  
-   - Restrict analysis to the maximum year for consistent comparison.
-
-3. **Expand tags into rows**  
-   - Normalize tags (originally XML-like strings) into separate rows for aggregation.
-
-4. **Join with answers**  
-   - Compute number of answers per question and accepted answer flag.
-
-5. **Aggregate by tag**  
-   - Compute per-tag metrics:
-     - `total_questions`  
-     - `avg_answers_per_question`  
-     - `accepted_answer_rate`
-
-6. **Compute tag pairs**  
-   - Generate co-occurring tag combinations to identify synergistic topics.  
-   - Lexicographically order tags to avoid duplicate pairs.
-
-7. **Rank performance**  
-   - Use `ROW_NUMBER()` or `RANK()` to extract:
-     - Top-performing tags and tag pairs  
-     - Bottom-performing tags and tag pairs
-
-8. **Combine all results**  
-   - Unified output for **single tags** and **tag pairs**, with consistent column names for dashboarding or downstream use.
-
-9. **Optimize performance**  
-   - Modular CTEs and late aggregations reduce scanned data.  
-   - Total scan: ≈1.27 GB for full query execution (~8s runtime).
-
-10. **Document and validate**  
-    - Meaningful column names, comments, and consistent ranking logic ensure reproducibility and data quality.
-
----
-
-## 📈 Results Summary
-
-### 🏆 Top Performing Tags
-
-| Rank | Tag | Avg Answers | Accepted Rate |
-|------|-----|-------------|---------------|
-| 1    | `conditional-aggregation` | 1.39 | 0.96 |
-| 2    | `sql-in`                  | 1.27 | 0.91 |
-| 3    | `select-object`           | 1.18 | 0.91 |
-| 10   | `google-query-language`   | 1.22 | 0.90 |
-
-**Interpretation:**  
-High-performing tags generally represent **core data, aggregation, and query concepts**. These topics are common and widely understood.
-
----
-
-### ⚠️ Lowest Performing Tags
-
-| Rank | Tag | Avg Answers | Accepted Rate |
-|------|-----|-------------|---------------|
-| 1    | `kombu`                  | 0.0 | 0.0 |
-| 1    | `vagrant-windows`        | 0.0 | 0.0 |
-| 1    | `safari-web-inspector`   | 0.0 | 0.0 |
-
-**Interpretation:**  
-Low engagement indicates **niche or outdated technologies** with fewer expert contributors.
-
----
-
-### 🏆 Top Performing Tag Pairs
-
-| Rank | Tag Pair | Avg Answers | Accepted Rate |
-|------|----------|-------------|---------------|
-| 1    | `common-table-expression | sql-update` | 1.55 | 1.0 |
-| 2    | `sorting | vlookup`                   | 1.42 | 1.0 |
-| 3    | `conditional-aggregation | group-by` | 1.38 | 1.0 |
-
-**Interpretation:**  
-Synergistic tag combinations reflect **specific, high-value topics** that attract quick and accurate answers.
-
----
-
-### ⚠️ Lowest Performing Tag Pairs
-
-| Rank | Tag Pair | Avg Answers | Accepted Rate |
-|------|----------|-------------|---------------|
-| 1    | `flutter | object-detection`              | 0.0 | 0.0 |
-| 1    | `amazon-kinesis | apache-spark`          | 0.0 | 0.0 |
-
-**Interpretation:**  
-These pairs mix **distant domains** where community expertise is sparse.
+1. **Dynamic Year Detection** – Always uses the most recent year available in the Stack Overflow dataset.  
+2. **Data Preprocessing** –  
+   - Tags converted to lowercase and split into arrays for consistent aggregation.  
+   - Questions without tags are excluded.  
+3. **Answer Aggregation** – Total answers per question pre-aggregated for performance.  
+4. **Metrics Calculation** – For each tag and tag pair:  
+   - `avg_answers_per_question` = total answers ÷ number of questions  
+   - `accepted_answer_rate` = accepted answers ÷ number of questions  
+   - Only tags/tag pairs with **≥ 10 questions** are included.  
+5. **Ranking** – Separate rankings for top and bottom performers based on **accepted answer rate**, with `avg_answers_per_question` as secondary metric.  
+6. **Unified Query** – Both single tags and tag pairs processed in one query to reduce scanned data.
 
 ---
 
@@ -134,6 +35,67 @@ These pairs mix **distant domains** where community expertise is sparse.
 | **Duplicated tag pairs** | Deduplicated via lexicographical ordering |
 | **Year selection** | Dynamically determined from max year |
 | **Validation** | Cross-checked counts and averages for consistency |
+
+---
+
+## 🏆 Top Performing Single Tags
+| Rank | Tag | Total Questions | Avg Answers | Accepted Rate |
+|------|-----|----------------|------------|---------------|
+| 1    | conditional-aggregation | 23 | 1.39 | 0.96 |
+| 2    | sql-in                  | 22 | 1.27 | 0.91 |
+| 3    | usort                   | 11 | 1.18 | 0.91 |
+| 3    | moose                   | 11 | 1.18 | 0.91 |
+| 3    | select-object           | 11 | 1.18 | 0.91 |
+| 6    | malli                   | 11 | 1.00 | 0.91 |
+| 7    | jstreer                 | 11 | 0.91 | 0.91 |
+| 8    | non-standard-evaluation | 10 | 1.80 | 0.90 |
+| 9    | supplier                | 10 | 1.30 | 0.90 |
+| 10   | google-query-language   | 277| 1.22 | 0.90 |
+
+### ⚠️ Lowest Performing Single Tags
+| Rank | Tag | Total Questions | Avg Answers | Accepted Rate |
+|------|-----|----------------|------------|---------------|
+| 1    | pyvmomi              | 11 | 0.00 | 0.00 |
+| 1    | captiveportal        | 11 | 0.00 | 0.00 |
+| 1    | safari-web-inspector | 12 | 0.00 | 0.00 |
+| 1    | cloudsim             | 10 | 0.00 | 0.00 |
+| 1    | dragula              | 11 | 0.00 | 0.00 |
+| 1    | kombu                | 13 | 0.00 | 0.00 |
+| 1    | activexobject        | 12 | 0.00 | 0.00 |
+| 1    | vagrant-windows      | 10 | 0.00 | 0.00 |
+| 1    | lammps               | 10 | 0.00 | 0.00 |
+| 1    | google-schemas       | 11 | 0.00 | 0.00 |
+
+---
+
+## 🏆 Top Performing Tag Pairs
+| Rank | Tag Pair | Total Questions | Avg Answers | Accepted Rate |
+|------|----------|----------------|------------|---------------|
+| 1    | common-table-expression | sql-update | 11 | 1.55 | 1.00 |
+| 2    | sorting | vlookup | 12 | 1.42 | 1.00 |
+| 3    | google-query-language | match | 10 | 1.40 | 1.00 |
+| 4    | conditional-aggregation | group-by | 13 | 1.38 | 1.00 |
+| 5    | google-sheets-formula | syntax | 11 | 1.36 | 1.00 |
+| 5    | sql-order-by | window-functions | 11 | 1.36 | 1.00 |
+| 7    | moose | perl | 10 | 1.30 | 1.00 |
+| 7    | ggplot2 | purrr | 10 | 1.30 | 1.00 |
+| 9    | flatten | transpose | 40 | 1.27 | 1.00 |
+| 10   | google-query-language | transpose | 20 | 1.25 | 1.00 |
+| 10   | google-query-language | import | 20 | 1.25 | 1.00 |
+
+### ⚠️ Lowest Performing Tag Pairs
+| Rank | Tag Pair | Total Questions | Avg Answers | Accepted Rate |
+|------|----------|----------------|------------|---------------|
+| 1    | attention-model | deep-learning | 16 | 0.00 | 0.00 |
+| 1    | flutter | object-detection | 10 | 0.00 | 0.00 |
+| 1    | concurrency | php | 10 | 0.00 | 0.00 |
+| 1    | fortran | gcc | 10 | 0.00 | 0.00 |
+| 1    | api | module | 10 | 0.00 | 0.00 |
+| 1    | laravel | ssh | 10 | 0.00 | 0.00 |
+| 1    | amazon-kinesis | apache-spark | 11 | 0.00 | 0.00 |
+| 1    | chromecast | google-cast-sdk | 11 | 0.00 | 0.00 |
+| 1    | next.js | woocommerce | 10 | 0.00 | 0.00 |
+| 1    | ssl | swift | 10 | 0.00 | 0.00 |
 
 ---
 
@@ -155,7 +117,7 @@ It’s **production-ready** for dashboards, reports, or research studies.
 
 ## ⚡ Performance & Cost
 
-- Bytes processed: **1.27 GB** 
+- Bytes processed: **1.27 GB**  
 - Execution time: ~**8 seconds**  
 - Slot milliseconds: ~**581,426**  
 - Optimized to **scan source data only once** for both single tags and tag pairs.
