@@ -161,7 +161,7 @@ SELECT
     WHEN reputation_bucket = '>1000'
          AND answer_count_bucket IN ('0','1')
          AND accepted_answer_rate < 0.6
-      THEN 'High Reputation, Low Engagement'
+      THEN 'Top User, Low Engagement'
 
     -- Default category for all other cases
     ELSE 'Other'
