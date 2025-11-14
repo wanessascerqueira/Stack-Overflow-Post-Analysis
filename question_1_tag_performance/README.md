@@ -74,31 +74,31 @@ The results provide actionable insights for understanding community engagement a
 ## 🏆 Top Performing Tag Pairs
 | Rank | Tag Pair | Total Questions | Avg Answers | Accepted Rate |
 |------|----------|----------------|------------|---------------|
-| 1    | common-table-expression | sql-update | 11 | 1.55 | 1.00 |
-| 2    | sorting | vlookup | 12 | 1.42 | 1.00 |
-| 3    | google-query-language | match | 10 | 1.40 | 1.00 |
-| 4    | conditional-aggregation | group-by | 13 | 1.38 | 1.00 |
-| 5    | google-sheets-formula | syntax | 11 | 1.36 | 1.00 |
-| 6    | sql-order-by | window-functions | 11 | 1.36 | 1.00 |
-| 7    | moose | perl | 10 | 1.30 | 1.00 |
-| 8    | ggplot2 | purrr | 10 | 1.30 | 1.00 |
-| 9    | flatten | transpose | 40 | 1.27 | 1.00 |
-| 10   | google-query-language | transpose | 20 | 1.25 | 1.00 |
-| 10   | google-query-language | import | 20 | 1.25 | 1.00 |
+| 1    | common-table-expression \| sql-update | 11 | 1.55 | 1.00 |
+| 2    | sorting \| vlookup | 12 | 1.42 | 1.00 |
+| 3    | google-query-language \| match | 10 | 1.40 | 1.00 |
+| 4    | conditional-aggregation \| group-by | 13 | 1.38 | 1.00 |
+| 5    | google-sheets-formula \| syntax | 11 | 1.36 | 1.00 |
+| 6    | sql-order-by \| window-functions | 11 | 1.36 | 1.00 |
+| 7    | moose \| perl | 10 | 1.30 | 1.00 |
+| 8    | ggplot2 \| purrr | 10 | 1.30 | 1.00 |
+| 9    | flatten \| transpose | 40 | 1.27 | 1.00 |
+| 10   | google-query-language \| transpose | 20 | 1.25 | 1.00 |
+| 10   | google-query-language \| import | 20 | 1.25 | 1.00 |
 
 ### ⚠️ Lowest Performing Tag Pairs
 | Rank | Tag Pair | Total Questions | Avg Answers | Accepted Rate |
 |------|----------|----------------|------------|---------------|
-| 1    | attention-model | deep-learning | 16 | 0.00 | 0.00 |
-| 1    | flutter | object-detection | 10 | 0.00 | 0.00 |
+| 1    | attention-model \| deep-learning | 16 | 0.00 | 0.00 |
+| 1    | flutter \| object-detection | 10 | 0.00 | 0.00 |
 | 1    | concurrency | php | 10 | 0.00 | 0.00 |
-| 1    | fortran | gcc | 10 | 0.00 | 0.00 |
-| 1    | api | module | 10 | 0.00 | 0.00 |
-| 1    | laravel | ssh | 10 | 0.00 | 0.00 |
-| 1    | amazon-kinesis | apache-spark | 11 | 0.00 | 0.00 |
-| 1    | chromecast | google-cast-sdk | 11 | 0.00 | 0.00 |
-| 1    | next.js | woocommerce | 10 | 0.00 | 0.00 |
-| 1    | ssl | swift | 10 | 0.00 | 0.00 |
+| 1    | fortran \| gcc | 10 | 0.00 | 0.00 |
+| 1    | api \| module | 10 | 0.00 | 0.00 |
+| 1    | laravel \| ssh | 10 | 0.00 | 0.00 |
+| 1    | amazon-kinesis \| apache-spark | 11 | 0.00 | 0.00 |
+| 1    | chromecast \| google-cast-sdk | 11 | 0.00 | 0.00 |
+| 1    | next.js \| woocommerce | 10 | 0.00 | 0.00 |
+| 1    | ssl \| swift | 10 | 0.00 | 0.00 |
 
 ---
 
